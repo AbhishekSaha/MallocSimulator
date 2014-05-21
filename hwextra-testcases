@@ -1,0 +1,211 @@
+Mainone: //Too large
+
+Input:
+int main(int argc, const char * argv[]) //Error
+{
+    
+    // insert code here...
+    
+    char * rouse = malloc(4000);
+ 
+    
+    return 0;
+}
+
+Expected Output: 
+Error
+
+Maintwo: //Not enough space, exceeded by one
+Input:
+int main(int argc, const char * argv[]) //Error
+ {
+ 
+ char * bool = malloc(95);
+ char * jim = malloc(162);
+ 
+ char * json = malloc(30);
+ char * mal = malloc(30);
+ char * roy = malloc(15);
+ char * alal = malloc(1);
+ 
+ 
+ 
+ 
+ return 0;
+ }
+ Expected Output:
+Error
+
+ Mainthree //Fits 500 bytes
+ Input: 
+ int main(int argc, const char * argv[])
+ {
+ 
+    char * bool = malloc(95);
+    char * jim = malloc(95);
+    char * ronny = malloc(95);
+    char * tim = malloc(95);
+
+    return 0;
+ }
+ 
+ Expected Output: 
+ Works
+ 
+ Mainfour: //Fits too many
+ 
+ Input:
+ int main(int argc, const char * argv[]) //Error
+ {
+ 
+ char * bool = malloc(95);
+ char * jim = malloc(95);
+ char * ronny = malloc(95);
+ char * tim = malloc(95);
+ char * one = malloc(1);
+ return 0;
+ }
+Expected Output: 
+Error
+
+
+Mainfive: //Free one, then replace
+Input:
+int main(int argc, const char * argv[])
+ {
+ 
+ char * bool = malloc(95);
+ char * jim = malloc(95);
+ char * ronny = malloc(95);
+ char * tim = malloc(95);
+ free(jim);
+ char * roy = malloc(95);
+ 
+ return 0;
+ }
+ 
+ Expected Output:
+ Works
+ 
+ Mainsix: //Remove two, replace with remainder
+ Input: 
+ int main(int argc, const char * argv[])
+ {
+ 
+ char * bool = malloc(95);
+ char * jim = malloc(95);
+ char * ronny = malloc(95);
+ char * tim = malloc(95);
+ free(jim);
+ free(ronny);
+ char * roy = malloc(214);
+
+ 
+ return 0;
+ }
+Expected Output:
+Works
+
+Mainseven: //frees memory, but not in the section for smaller items
+Input:
+int main(int argc, const char * argv[])
+ {
+ 
+ char * bool = malloc(95);
+ char * jim = malloc(95);
+ char * ronny = malloc(95);
+ char * tim = malloc(95);
+ free(jim);
+ free(ronny);
+ char * roy = malloc(15);
+ 
+ 
+ return 0;
+ }
+ 
+Expected Output:
+Error
+
+Maineight: //frees memory towards the middle free chunk
+Input:
+int main{
+
+char * bool = malloc(95);
+    char * jim = malloc(95);
+    char * ronny = malloc(95);
+    char * tim = malloc(95);
+    free(tim);
+    free(ronny);
+    char * roy = malloc(15);
+    }
+
+Expected Output:
+Works
+
+Mainnine: //Fits 500 bytes, small and big
+Input:
+
+int main(int argc, const char * argv[])
+ {
+ char * bool = malloc(95);
+ char * jim = malloc(162);
+ 
+ char * json = malloc(30);
+ char * mal = malloc(30);
+ char * roy = malloc(15);
+ 
+return 0;
+ }
+ 
+ Expected Output:
+ Works
+ 
+ Mainten: //Frees a chunk, redeclared with same name, and then freed again
+ Input:
+ int main(int argc, const char * argv[])
+ {
+ char * bool = malloc(95);
+ char * jim = malloc(162);
+ 
+ char * json = malloc(30);
+ char * mal = malloc(30);
+ char * roy = malloc(15);
+ 
+ free(roy);
+ roy = malloc(15);
+ free(roy);
+ return 0;
+ }
+ Expected Output:
+ Works
+ 
+ Maineleven: //frees chunk twice
+ Input:
+ int main(int argc, const char * argv[])
+ {
+ char * bool = malloc(95);
+ char * jim = malloc(162);
+ 
+ char * json = malloc(30);
+ char * mal = malloc(30);
+ char * roy = malloc(15);
+ free(roy);
+ free(roy);
+ return 0;
+ }
+ Expected Output:
+ Error
+ 
+ Maintwelve: //Frees uninitialized variable
+ Input:
+ int main(int argc, const char * argv[])
+{
+    int y;
+    
+   char * bool = malloc(95);
+    char * jim = malloc(162);
+    free(y);
+    return 0;}
+    
+Expected Output: 
+Error
